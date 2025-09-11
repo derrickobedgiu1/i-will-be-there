@@ -41,8 +41,9 @@
     fetch(`https://api.github.com/users/${username}`)
       .then(res => res.json())
       .then(data => {
+          const name = data.name ? data.name + '🍺' : 'I Will Be There';
         document.getElementById('profile-img').src = data.avatar_url;
-        document.getElementById('full-name').textContent = data.name || 'I Will Be There';
+        document.getElementById('full-name').textContent = name;
         document.getElementById('github-link').href = data.html_url;
         document.getElementById('email-link').href = data.email ? `mailto:${data.email}` : '#';
         document.getElementById('footer').textContent = `Made with ❤️ by ${data.name || username}`;
