@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>I Will Be There</title>
+  <meta name="description" content="A personal webpage promise: 'I Will Be There'" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#1e293b;
+      --muted:#9aa4b2;
+      --accent:#f97316;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,sans-serif;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#1e293b,#0f1724);color:#e6eef6;}
+    .card{background:var(--card);padding:3rem;border-radius:20px;max-width:700px;text-align:center;box-shadow:0 15px 35px rgba(0,0,0,0.5);}
+    h1{font-size:3rem;margin:0;color:#fff;}
+    p{font-size:1.25rem;color:var(--muted);margin:1rem 0 2rem;}
+    .profile-img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:1rem;border:3px solid var(--accent);}
+    .links a{display:inline-block;margin:0 10px;padding:10px 20px;border-radius:10px;background:var(--accent);color:#071022;text-decoration:none;font-weight:600;transition:0.3s;}
+    .links a:hover{opacity:0.85;}
+    footer{margin-top:2rem;color:var(--muted);font-size:0.9rem;}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="profile-img" id="profile-img" src="" alt="Profile Photo">
+    <h1 id="full-name">I Will Be There</h1>
+    <p>No matter the distance, no matter the time — I will be there.<br>Even if I don’t know exactly where.</p>
+    <div class="links">
+      <a id="github-link" href="#" target="_blank">GitHub</a>
+      <a id="email-link" href="#">Email Me</a>
+    </div>
+    <footer id="footer">Made with ❤️</footer>
+  </div>
+
+  <script>
+    const username = 'gp10devhts'; // Your GitHub username
+    fetch(`https://api.github.com/users/${username}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('profile-img').src = data.avatar_url;
+        document.getElementById('full-name').textContent = data.name || 'I Will Be There';
+        document.getElementById('github-link').href = data.html_url;
+        document.getElementById('email-link').href = data.email ? `mailto:${data.email}` : '#';
+        document.getElementById('footer').textContent = `Made with ❤️ by ${data.name || username}`;
+      })
+      .catch(err => console.error('GitHub API error:', err));
+  </script>
+</body>
+</html>
